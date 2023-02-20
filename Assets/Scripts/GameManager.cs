@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
             trialNum = trialNum + 1;
             SaveGame();
             newTrial();
-            this.ball.ResetPosition(); //ball should stop moving once game is over
+           // this.ball.ResetPosition(); //ball should stop moving once game is over
             timerIsActive = false;
             //Tinylytics.AnalyticsManager.LogCustomMetric("trialName", trialName);
             Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialNum.ToString() + "_" + trials[trialNum-1], playerWinOrLose + "_" + trialTimer.ToString());
