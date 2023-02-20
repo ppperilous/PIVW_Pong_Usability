@@ -7,10 +7,14 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     public new Rigidbody2D rigidbody;
     public float speed = 30;
+    GameObject RacketLeft;
+    GameObject RacketRight;
+    private Component racketScript;
 
     private void Awake()
     {
         this.rigidbody = GetComponent<Rigidbody2D>();
+        
     }
 
     public void ResetPosition()
@@ -24,6 +28,8 @@ public class Ball : MonoBehaviour
     {
         // Initial Velocity
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+        RacketLeft = GameObject.Find("RacketLeft");
+        RacketRight = GameObject.Find("RacketRight");
     }
 
     public void AddStartingForce()
@@ -33,24 +39,25 @@ public class Ball : MonoBehaviour
         if (direction == -1)
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+           
         }else
         {
             GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
+         
         }
      
     }
 
 
-    float hitFactor(Vector2 ballPos, Vector2 racketPos,
-                float racketHeight)
-    {
+     float hitFactor(Vector2 ballPos, Vector2 racketPos,
+                    float racketHeight) {
         // ascii art:
         // ||  1 <- at the top of the racket
         // ||
         // ||  0 <- at the middle of the racket
         // ||
         // || -1 <- at the bottom of the racket
-        return (ballPos.y - racketPos.y) / racketHeight;
+        return (ballPos.y - racketPos.y)/(racketHeight/2);
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -74,6 +81,10 @@ public class Ball : MonoBehaviour
 
             // Set Velocity with dir * speed
             GetComponent<Rigidbody2D>().velocity = dir * speed;
+
+            //  //Deactivate left racket, activate right racket
+            RacketLeft.SendMessage("stopRacket");
+            RacketRight.SendMessage("startRacket");
         }
 
         // Hit the right Racket?
@@ -89,6 +100,23 @@ public class Ball : MonoBehaviour
 
             // Set Velocity with dir * speed
             GetComponent<Rigidbody2D>().velocity = dir * speed;
+
+             //Deactivate right racket, activate right racket
+            RacketLeft.SendMessage("startRacket");
+            RacketRight.SendMessage("stopRacket");
+        }
+        //Hit the left wall
+        if (col.gameObject.name == "WallLeft"){
+            // //Deactivate left racket, activate right racket
+            RacketLeft.SendMessage("stopRacket");
+            RacketRight.SendMessage("startRacket");
+        }
+        //Hit the right wall
+         if (col.gameObject.name == "WallRight")
+        {
+            // //Deactivate right racket, activate right racket
+            RacketLeft.SendMessage("startRacket");
+            RacketRight.SendMessage("stopRacket");
         }
     }
 
