@@ -11,6 +11,9 @@ public class Ball : MonoBehaviour
     GameObject RacketRight;
     private Component racketScript;
 
+    public Transform Lracket_pos;
+    public Vector2 LracketRelative;
+
     private void Awake()
     {
         this.rigidbody = GetComponent<Rigidbody2D>();
@@ -30,9 +33,10 @@ public class Ball : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
         RacketLeft = GameObject.Find("RacketLeft");
         RacketRight = GameObject.Find("RacketRight");
+       // Lracket_pos = RacketLeft.InverseTransformPoint(transform.position);
     }
 
-    public void AddStartingForce()
+        public void AddStartingForce()
     {
         // Flip a coin to determine if the ball starts left or right
         int direction = Random.Range(-1, 1);
@@ -107,6 +111,11 @@ public class Ball : MonoBehaviour
         }
         //Hit the left wall
         if (col.gameObject.name == "WallLeft"){
+            Debug.Log("hit the left wall");
+
+            //Detecting collision relative to racket (attempt)
+
+
             // //Deactivate left racket, activate right racket
             RacketLeft.SendMessage("stopRacket");
             RacketRight.SendMessage("startRacket");
@@ -114,6 +123,7 @@ public class Ball : MonoBehaviour
         //Hit the right wall
          if (col.gameObject.name == "WallRight")
         {
+            Debug.Log("Hit the right wall");
             // //Deactivate right racket, activate right racket
             RacketLeft.SendMessage("startRacket");
             RacketRight.SendMessage("stopRacket");

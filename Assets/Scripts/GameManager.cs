@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public string trialName;
     public List<string> trials;
     public int winningScore; //set this value in both scenes!
+ 
 
     private string sceneName;
 
@@ -42,10 +43,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (timerIsActive) 
+        if (timerIsActive)
         {
             trialTimer += Time.deltaTime;
         }
+
     }
 
 
@@ -79,7 +81,7 @@ public class GameManager : MonoBehaviour
         ResetRound();
 
     }
-
+   
 
     public void ResetRound()
     {
