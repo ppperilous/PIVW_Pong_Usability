@@ -8,7 +8,9 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     public float timeRemaining = 50;
+    public float inverseTime = 50;
     public bool timerIsRunning = false;
+    public GameManager ResetRound;
     public TextMeshProUGUI TimeLeft;
    // public GameManager ResetRound;
     public static float currentTime;
@@ -17,7 +19,7 @@ public class Timer : MonoBehaviour
         // Starts the timer automatically
         timerIsRunning = true;
         // Grab access to GameManager in order to call ResetRound() function
-       // ResetRound = GameObject.Find("Game Manager").GetComponent<GameManager>();
+       ResetRound = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     void Update()
     {
@@ -30,18 +32,19 @@ public class Timer : MonoBehaviour
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
                 currentTime = exportTime();
+                
             }
             else
             {
-                Debug.Log("Time has run out!");
+                Debug.Log("Time has run out! " + currentTime);
                 timeRemaining = 0;
                 timerIsRunning = false;
-               // ResetRound.ResetRound();
+                ResetRound.ResetRound();
             }
         }
     }
     public float exportTime(){
-        return timeRemaining;
+        return inverseTime - timeRemaining;
         }
     private void DisplayTime(float timeToDisplay)
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 
 public class GameManager : MonoBehaviour
@@ -11,9 +12,11 @@ public class GameManager : MonoBehaviour
 
     public Text playerScoreText;
     public Text computerScoreText;
+    public TextMeshProUGUI totalScoreText;
 
     private int _playerScore;
     private int _computerScore;
+    private int _totalScore;
 
     public static string initials_input;
     public int trialNum;
@@ -56,26 +59,31 @@ public class GameManager : MonoBehaviour
 
     public void PlayerScores()
     {
-        //Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", _playerScore.ToString());
         _playerScore++;
+        _totalScore++;
         this.playerScoreText.text = _playerScore.ToString();
+        this.totalScoreText.text = _totalScore.ToString();
         ResetRound();
         
     }
 
     public void ComputerScores()
     {
-        //Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", _computerScore.ToString());
         _computerScore++;
+        _totalScore--;
         this.computerScoreText.text = _computerScore.ToString();
+        this.totalScoreText.text = _totalScore.ToString();
+        this.ball.ResetPosition();
+        StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
+       
         ResetRound();
 
     }
 
 
-    private void ResetRound()
+    public void ResetRound()
     {
-        if (_playerScore == winningScore || _computerScore == winningScore)
+        if (_totalScore == winningScore || Timer.currentTime <= 0)
         {
             if (_playerScore > _computerScore)
             {
@@ -86,19 +94,24 @@ public class GameManager : MonoBehaviour
                 playerWinOrLose = "lose";
             }
             trialNum = trialNum + 1;
+            Tinylytics.AnalyticsManager.LogCustomMetric("trialName", trialName);
+            Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", _computerScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", _totalScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", _playerScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
+            Debug.Log("Round Over!");
             SaveGame();
             newTrial();
            // this.ball.ResetPosition(); //ball should stop moving once game is over
             timerIsActive = false;
-            //Tinylytics.AnalyticsManager.LogCustomMetric("trialName", trialName);
-            Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialNum.ToString() + "_" + trials[trialNum-1], playerWinOrLose + "_" + trialTimer.ToString());
+            // Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialNum.ToString() + "_" + trials[trialNum-1], playerWinOrLose + "_" + trialTimer.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("playerWinOrLose", playerWinOrLose);
-            
+
         }
         else
         {
-            this.ball.ResetPosition();
-            StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
+          // this.ball.ResetPosition();
+          // StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
         }
 
         
