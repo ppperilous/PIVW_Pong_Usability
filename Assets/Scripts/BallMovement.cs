@@ -83,8 +83,8 @@ public class BallMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = dir * speed;
 
             //Deactivate left racket, activate right racket
-            RacketLeft.SendMessage("stopRacket");
-            RacketRight.SendMessage("startRacket");
+            RacketLeft.SendMessage("StopRacket");
+            RacketRight.SendMessage("StartRacket");
         }
 
         // Hit the right Racket?
@@ -102,8 +102,8 @@ public class BallMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = dir * speed;
 
             //Deactivate right racket, activate right racket
-            RacketLeft.SendMessage("startRacket");
-            RacketRight.SendMessage("stopRacket");
+            RacketLeft.SendMessage("StartRacket");
+            RacketRight.SendMessage("StopRacket");
         }
 
         // Hit the left Wall?
@@ -111,7 +111,8 @@ public class BallMovement : MonoBehaviour
         {
 
             //Reposition ball to center
-            transform.position = new Vector2(0, 0);
+            float yPos = Random.Range(-5, 12);
+            transform.position = new Vector2(0, yPos);
 
             //Reduce speed a little, if it is more than 20
             if (speed > 20) speed -= 10;
@@ -120,8 +121,8 @@ public class BallMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
 
             //Deactivate left racket, activate right racket
-            RacketLeft.SendMessage("stopRacket");
-            RacketRight.SendMessage("startRacket");
+            RacketLeft.SendMessage("StopRacket");
+            RacketRight.SendMessage("StartRacket");
 
             //Update Score?
 
@@ -141,8 +142,8 @@ public class BallMovement : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
 
             //Deactivate right racket, activate right racket
-            RacketLeft.SendMessage("startRacket");
-            RacketRight.SendMessage("stopRacket");
+            RacketLeft.SendMessage("StartRacket");
+            RacketRight.SendMessage("StopRacket");
 
             //Update Score?
 

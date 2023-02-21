@@ -5,12 +5,12 @@ using UnityEngine;
 public class MoveRacket : MonoBehaviour
 {
     public float speed = 0;
-    public float maxSpeed = 40;
+    public float maxSpeed = 35;
     public string axis = "Vertical";
 
-    //GameObject highlight;
-    //GameObject upArrow;
-    //GameObject downArrow;
+    GameObject highlight;
+    GameObject upArrow;
+    GameObject downArrow;
 
     bool racketState = false;
     float v;
@@ -20,12 +20,12 @@ public class MoveRacket : MonoBehaviour
 
     void Start()
     {
-        //highlight = transform.GetChild(0).gameObject;
-        //upArrow = transform.GetChild(1).gameObject;
-        //downArrow = transform.GetChild(2).gameObject;
+        upArrow = transform.GetChild(0).gameObject;
+        downArrow = transform.GetChild(1).gameObject;
+        highlight = transform.GetChild(2).gameObject;
 
-        //downArrow.SetActive(false);
-        //upArrow.SetActive(false);
+        downArrow.SetActive(false);
+        upArrow.SetActive(false);
     }
 
     void FixedUpdate()
@@ -33,23 +33,23 @@ public class MoveRacket : MonoBehaviour
         v = Input.GetAxisRaw(axis);
 
         //SET FEEDBACK ARROWS 
-        //if ((v < 0) && (racketState))
-        //{
-        //    downArrow.SetActive(true);
-        //    upArrow.SetActive(false);
+        if ((v < 0) && (racketState))
+        {
+            downArrow.SetActive(true);
+            upArrow.SetActive(false);
 
-        //}
-        //else if ((v > 0) && (racketState))
-        //{
-        //    downArrow.SetActive(false);
-        //    upArrow.SetActive(true);
+        }
+        else if ((v > 0) && (racketState))
+        {
+            downArrow.SetActive(false);
+            upArrow.SetActive(true);
 
-        //}
-        //else
-        //{
-        //    downArrow.SetActive(false);
-        //    upArrow.SetActive(false);
-        //}
+        }
+        else
+        {
+            downArrow.SetActive(false);
+            upArrow.SetActive(false);
+        }
 
 
         //SET RACKET SPEED
@@ -88,16 +88,16 @@ public class MoveRacket : MonoBehaviour
 
     }
 
-    void stopRacket()
+    void StopRacket()
     {
-        //highlight.SetActive(false);
+        highlight.SetActive(false);
         racketState = false;
 
     }
 
-    void startRacket()
+    void StartRacket()
     {
-        //highlight.SetActive(true);
+        highlight.SetActive(true);
         racketState = true;
     }
 }
