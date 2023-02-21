@@ -806,6 +806,7 @@ GameObject:
   - component: {fileID: 595237714}
   - component: {fileID: 595237713}
   - component: {fileID: 595237715}
+  - component: {fileID: 595237716}
   - component: {fileID: 595237717}
   m_Layer: 0
   m_Name: RacketRight
@@ -943,6 +944,22 @@ MonoBehaviour:
   speed: 30
   maxSpeed: 40
   axis: Vertical2
+--- !u!114 &595237716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595237710}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15d02f641712c42e0bdbb27482f08e07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 30
+  axis: Vertical
+  ball: {fileID: 650185660}
+  rigidbody: {fileID: 0}
 --- !u!114 &595237717
 MonoBehaviour:
   m_ObjectHideFlags: 0

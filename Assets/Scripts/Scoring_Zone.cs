@@ -7,9 +7,14 @@ public class Scoring_Zone : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Ball ball = collision.gameObject.GetComponent<Ball>();
+        //Ball ball = collision.gameObject.GetComponent<Ball>();
 
-        if (ball != null)
+        //if (ball != null)
+        //{
+        //    this.scoreTrigger.Invoke();
+        //}
+
+        if (collision.gameObject.name =="Ball")
         {
             this.scoreTrigger.Invoke();
         }
