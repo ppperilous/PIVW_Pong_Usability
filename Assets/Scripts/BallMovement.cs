@@ -28,7 +28,8 @@ public class BallMovement : MonoBehaviour
         RacketRight = GameObject.Find("RacketRight");
 
         // Stop movement of Left Racket (as ball moves to the right
-        // RacketLeft.SendMessage("stopRacket");
+        //RacketLeft.SendMessage("StopRacket");
+        //RacketRight.SendMessage("StartRacket");
 
         // Initial Velocity of Ball
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;

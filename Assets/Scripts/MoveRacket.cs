@@ -4,13 +4,23 @@ using UnityEngine;
 
 public class MoveRacket : MonoBehaviour
 {
-    public float speed = 0;
+    public float speed = 5;
     public float maxSpeed = 35;
-    public string axis = "Vertical";
+    public string axis = "Vertical2";
 
     GameObject highlight;
+
     GameObject upArrow;
     GameObject downArrow;
+    GameObject racketUpEffect;
+    GameObject racketDownEffect;
+
+    //GameObject errorEffect;
+
+    public GameObject upMagnet;
+    public GameObject downMagnet;
+    GameObject upMagnetWaves;
+    GameObject downMagnetWaves;
 
     bool racketState = false;
     float v;
@@ -20,12 +30,42 @@ public class MoveRacket : MonoBehaviour
 
     void Start()
     {
-        upArrow = transform.GetChild(0).gameObject;
-        downArrow = transform.GetChild(1).gameObject;
-        highlight = transform.GetChild(2).gameObject;
+        highlight = transform.GetChild(0).gameObject;
 
+        //Racket Movement Effects
+        racketUpEffect = transform.GetChild(3).gameObject;
+        racketDownEffect = transform.GetChild(4).gameObject;
+        racketUpEffect.SetActive(false);
+        racketDownEffect.SetActive(false);
+
+        //Error Effect on Simultaneous Press
+        //errorEffect = transform.GetChild(9).gameObject;
+        //errorEffect.SetActive(false);
+
+
+        ////////////////////////////////////////////////////
+        //REQUIRED FOR RACKET PONG
+        //Arrows for RacketPong
+        upArrow = transform.GetChild(1).gameObject;
+        downArrow = transform.GetChild(2).gameObject;
         downArrow.SetActive(false);
         upArrow.SetActive(false);
+
+        ////////////////////////////////////////////////////
+        //REQUIRED FOR MAGNET PONG
+
+        //Magnet Waves for MagnetPong
+        upMagnetWaves = upMagnet.transform.GetChild(0).gameObject;
+        downMagnetWaves = downMagnet.transform.GetChild(0).gameObject;
+        upMagnetWaves.SetActive(false);
+        downMagnetWaves.SetActive(false);
+
+        //Magnets
+        //upMagnet = transform.GetChild(5).gameObject;
+        //downMagnet = transform.GetChild(6).gameObject;
+        //upMagnet.SetActive(false);
+        //downMagnet.SetActive(false);
+
     }
 
     void FixedUpdate()
@@ -35,20 +75,44 @@ public class MoveRacket : MonoBehaviour
         //SET FEEDBACK ARROWS 
         if ((v < 0) && (racketState))
         {
+            racketUpEffect.SetActive(false);
+            racketDownEffect.SetActive(true);
+
+            //Racket Pong
             downArrow.SetActive(true);
             upArrow.SetActive(false);
+
+            ////Magnet Pong
+            downMagnetWaves.SetActive(true);
+            upMagnetWaves.SetActive(false);
 
         }
         else if ((v > 0) && (racketState))
         {
+            racketUpEffect.SetActive(true);
+            racketDownEffect.SetActive(false);
+
+            //Racket Pong
             downArrow.SetActive(false);
             upArrow.SetActive(true);
+
+            ////Magnet Pong
+            downMagnetWaves.SetActive(false);
+            upMagnetWaves.SetActive(true);
 
         }
         else
         {
+            racketUpEffect.SetActive(false);
+            racketDownEffect.SetActive(false);
+
+            //Racket Pong
             downArrow.SetActive(false);
             upArrow.SetActive(false);
+
+            ////Magnet Pong
+            downMagnetWaves.SetActive(false);
+            upMagnetWaves.SetActive(false);
         }
 
 
