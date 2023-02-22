@@ -155,8 +155,6 @@ public class BallMovement : MonoBehaviour
             RacketLeft.SendMessage("StopRacket");
             RacketRight.SendMessage("StartRacket");
 
-            //Update Score?
-
         }
 
         //Hit the right wall?
@@ -175,8 +173,6 @@ public class BallMovement : MonoBehaviour
             //Deactivate right racket, activate right racket
             RacketLeft.SendMessage("StartRacket");
             RacketRight.SendMessage("StopRacket");
-
-            //Update Score?
 
         }
 

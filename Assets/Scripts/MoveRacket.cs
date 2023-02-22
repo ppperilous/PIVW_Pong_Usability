@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MoveRacket : MonoBehaviour
 {
@@ -26,9 +27,11 @@ public class MoveRacket : MonoBehaviour
     float prevV = 0;
     float accFactor = 0;
 
+    Scene CurrentScene; 
 
     void Start()
     {
+        CurrentScene = SceneManager.GetActiveScene();
         highlight = transform.GetChild(2).gameObject;
 
         //Racket Movement Effects
@@ -44,6 +47,8 @@ public class MoveRacket : MonoBehaviour
 
         ////////////////////////////////////////////////////
         //REQUIRED FOR RACKET PONG
+
+        
         //Arrows for RacketPong
         upArrow = transform.GetChild(3).gameObject;
         downArrow = transform.GetChild(4).gameObject;
@@ -60,13 +65,23 @@ public class MoveRacket : MonoBehaviour
         downMagnetWaves.SetActive(false);
 
         //Magnets
-        upMagnet.SetActive(false);
-        downMagnet.SetActive(false);
+        if (CurrentScene.name == "red")
+        {
+            upMagnet.SetActive(true);
+            downMagnet.SetActive(true);
+
+        } else if (CurrentScene.name == "blue")
+        {
+            upMagnet.SetActive(false);
+            downMagnet.SetActive(false);
+        }
+        
 
     }
 
     void FixedUpdate()
     {
+        CurrentScene = SceneManager.GetActiveScene();
         v = Input.GetAxisRaw(axis);
 
         //SET FEEDBACK ARROWS 
@@ -75,13 +90,20 @@ public class MoveRacket : MonoBehaviour
             racketUpEffect.SetActive(false);
             racketDownEffect.SetActive(true);
 
-            //Racket Pong
-            downArrow.SetActive(true);
-            upArrow.SetActive(false);
 
-            ////Magnet Pong
-            //downMagnetWaves.SetActive(true);
-            //upMagnetWaves.SetActive(false);
+            if (CurrentScene.name == "red")
+            {
+                ////Magnet Pong
+                downMagnetWaves.SetActive(true);
+                upMagnetWaves.SetActive(false);
+
+            }
+            else if (CurrentScene.name == "blue")
+            {
+                //Racket Pong
+                downArrow.SetActive(true);
+                upArrow.SetActive(false);
+            }
 
         }
         else if ((v > 0) && (racketState))
@@ -89,13 +111,19 @@ public class MoveRacket : MonoBehaviour
             racketUpEffect.SetActive(true);
             racketDownEffect.SetActive(false);
 
-            //Racket Pong
-            downArrow.SetActive(false);
-            upArrow.SetActive(true);
+            if (CurrentScene.name == "red")
+            {
+                //Magnet Pong
+                downMagnetWaves.SetActive(false);
+                upMagnetWaves.SetActive(true);
 
-            ////Magnet Pong
-            //downMagnetWaves.SetActive(false);
-            //upMagnetWaves.SetActive(true);
+            }
+            else if (CurrentScene.name == "blue")
+            {
+                //Racket Pong
+                downArrow.SetActive(false);
+                upArrow.SetActive(true);
+            }
 
         }
         else
@@ -103,13 +131,20 @@ public class MoveRacket : MonoBehaviour
             racketUpEffect.SetActive(false);
             racketDownEffect.SetActive(false);
 
-            //Racket Pong
-            downArrow.SetActive(false);
-            upArrow.SetActive(false);
+            if (CurrentScene.name == "red")
+            {
+                //Magnet Pong
+                downMagnetWaves.SetActive(false);
+                upMagnetWaves.SetActive(false);
 
-            ////Magnet Pong
-            //downMagnetWaves.SetActive(false);
-            //upMagnetWaves.SetActive(false);
+            }
+            else if (CurrentScene.name == "blue")
+            {
+                //Racket Pong
+                downArrow.SetActive(false);
+                upArrow.SetActive(false);
+            }
+
         }
 
 
