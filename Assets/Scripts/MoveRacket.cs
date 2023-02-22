@@ -22,6 +22,9 @@ public class MoveRacket : MonoBehaviour
     GameObject upMagnetWaves;
     GameObject downMagnetWaves;
 
+    GameObject placeHolderArrowUp;
+    GameObject placeHolderArrowDown;
+
     bool racketState = false;
     float v;
     float prevV = 0;
@@ -47,13 +50,16 @@ public class MoveRacket : MonoBehaviour
 
         ////////////////////////////////////////////////////
         //REQUIRED FOR RACKET PONG
-
-        
         //Arrows for RacketPong
         upArrow = transform.GetChild(3).gameObject;
         downArrow = transform.GetChild(4).gameObject;
         downArrow.SetActive(false);
         upArrow.SetActive(false);
+
+        placeHolderArrowUp = transform.GetChild(0).gameObject;
+        placeHolderArrowDown = transform.GetChild(1).gameObject;
+        placeHolderArrowUp.SetActive(false);
+        placeHolderArrowDown.SetActive(false);
 
         ////////////////////////////////////////////////////
         //REQUIRED FOR MAGNET PONG
@@ -103,6 +109,8 @@ public class MoveRacket : MonoBehaviour
                 //Racket Pong
                 downArrow.SetActive(true);
                 upArrow.SetActive(false);
+                placeHolderArrowUp.SetActive(true);
+                placeHolderArrowDown.SetActive(true);
             }
 
         }
@@ -123,6 +131,8 @@ public class MoveRacket : MonoBehaviour
                 //Racket Pong
                 downArrow.SetActive(false);
                 upArrow.SetActive(true);
+                placeHolderArrowUp.SetActive(true);
+                placeHolderArrowDown.SetActive(true);
             }
 
         }
@@ -143,6 +153,8 @@ public class MoveRacket : MonoBehaviour
                 //Racket Pong
                 downArrow.SetActive(false);
                 upArrow.SetActive(false);
+                placeHolderArrowUp.SetActive(true);
+                placeHolderArrowDown.SetActive(true);
             }
 
         }
