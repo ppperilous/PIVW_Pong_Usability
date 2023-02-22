@@ -177,7 +177,7 @@ MonoBehaviour:
   timeRemaining: 10
   inverseTime: 10
   timerIsRunning: 1
-  ResetRound: {fileID: 0}
+  ResetRound: {fileID: 263362626}
   TimeLeft: {fileID: 81499354}
 --- !u!114 &81499354
 MonoBehaviour:
@@ -1632,6 +1632,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  L_missCounter_Over: 0
+  L_missCounter_Under: 0
   period: 3000
 --- !u!1 &710391959
 GameObject:

@@ -15,6 +15,7 @@ public class BallMovement : MonoBehaviour
     private Component racketScript;
 
     private Transform racketLeft_pos;
+
     public float L_missCounter_Over;
     public float L_missCounter_Under;
 
@@ -43,6 +44,21 @@ public class BallMovement : MonoBehaviour
 
         //Start stopwatch
         sw.Start();
+    }
+
+    void AddStartingForce()
+    {
+        int direction = Random.Range(-1, 1);
+        if (direction == -1)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
+
+        }
     }
 
     void Update()

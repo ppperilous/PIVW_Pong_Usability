@@ -19,9 +19,11 @@ public class GameManager : MonoBehaviour
     private int _totalScore;
 
     public static string initials_input;
+
     public int trialNum;
     public string trialName;
     public List<string> trials;
+
     public int winningScore; //set this value in both scenes!
  
 
@@ -56,9 +58,11 @@ public class GameManager : MonoBehaviour
 
     public void SaveGame()
     {
+        Debug.Log("In Save Game starting");
         GlobalControl.Instance.trialNum = trialNum;
         GlobalControl.Instance.trialName = trialName;
         GlobalControl.Instance.trials = trials;
+        Debug.Log("In Save Game");
     }
 
 
@@ -78,7 +82,7 @@ public class GameManager : MonoBehaviour
         _totalScore--;
         this.computerScoreText.text = _computerScore.ToString();
         this.totalScoreText.text = _totalScore.ToString();
-        this.ball.ResetPosition();
+        //this.ball.ResetPosition();
         StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
         ResetRound();
 
@@ -87,24 +91,27 @@ public class GameManager : MonoBehaviour
 
     public void ResetRound()
     {
-        if (Timer.currentTime <= 0)
+        Debug.Log("In Reset Round");
+
+        if (Timer.currentTime >= 10)
         {
-            if (_playerScore > _computerScore)
-            {
-                playerWinOrLose = "win";
-            }
-            if (_playerScore < _computerScore)
-            {
-                playerWinOrLose = "lose";
-            }
+            Debug.Log("In Reset Round if Statement");
+            //if (_playerScore > _computerScore)
+            //{
+            //    playerWinOrLose = "win";
+            //}
+            //if (_playerScore < _computerScore)
+            //{
+            //    playerWinOrLose = "lose";
+            //}
             trialNum = trialNum + 1;
             Tinylytics.AnalyticsManager.LogCustomMetric("trialName", trialName);
-            Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", _computerScore.ToString());
+            //Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", _computerScore.ToString());
             Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", _totalScore.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", _playerScore.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ",  ballStats.L_missCounter_Over.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ", ballStats.L_missCounter_Under.ToString());
-            Debug.Log("misses over " + ballStats.L_missCounter_Over);
+            //Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", _playerScore.ToString());
+            //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ",  ballStats.L_missCounter_Over.ToString());
+            //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ", ballStats.L_missCounter_Under.ToString());
+            //Debug.Log("misses over " + ballStats.L_missCounter_Over);
 
             Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
             Debug.Log("Round Over!");
@@ -127,8 +134,10 @@ public class GameManager : MonoBehaviour
 
     void newTrial()
     {
+        Debug.Log("In New Trial");
         if (trialNum < trials.Count)
         {
+            Debug.Log("In New Trial if Statement");
             trialName = trials[trialNum];
             SaveGame();
 
@@ -136,8 +145,9 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(WaitForSceneLoad());
         }
-        else { endGame(); }
+        else { endGame();
 
+        }
 
     }
 

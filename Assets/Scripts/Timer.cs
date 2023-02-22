@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     public bool timerIsRunning = false;
     public GameManager ResetRound;
     public TextMeshProUGUI TimeLeft;
-   // public GameManager ResetRound;
+   
     public static float currentTime;
     private void Start()
     {
@@ -23,7 +23,6 @@ public class Timer : MonoBehaviour
     }
     void Update()
     {
-
 
         if (timerIsRunning)
         {
@@ -43,9 +42,11 @@ public class Timer : MonoBehaviour
             }
         }
     }
+
     public float exportTime(){
         return inverseTime - timeRemaining;
-        }
+    }
+
     private void DisplayTime(float timeToDisplay)
     {
         timeToDisplay += 1;

@@ -17,6 +17,7 @@ public class Scoring_Zone : MonoBehaviour
         if (collision.gameObject.name =="Ball")
         {
             this.scoreTrigger.Invoke();
+
         }
     }
 
