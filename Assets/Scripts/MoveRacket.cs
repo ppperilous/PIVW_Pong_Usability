@@ -9,13 +9,12 @@ public class MoveRacket : MonoBehaviour
     public string axis = "Vertical2";
 
     GameObject highlight;
+    GameObject errorEffect;
 
     GameObject upArrow;
     GameObject downArrow;
     GameObject racketUpEffect;
     GameObject racketDownEffect;
-
-    //GameObject errorEffect;
 
     public GameObject upMagnet;
     public GameObject downMagnet;
@@ -39,8 +38,8 @@ public class MoveRacket : MonoBehaviour
         racketDownEffect.SetActive(false);
 
         //Error Effect on Simultaneous Press
-        //errorEffect = transform.GetChild(9).gameObject;
-        //errorEffect.SetActive(false);
+        errorEffect = transform.GetChild(7).gameObject;
+        errorEffect.SetActive(false);
 
 
         ////////////////////////////////////////////////////
@@ -117,11 +116,24 @@ public class MoveRacket : MonoBehaviour
         //SET RACKET SPEED
         if (racketState)
         {
+            if (Input.GetKey("w") && Input.GetKey("down"))
+            {
+                errorEffect.SetActive(true);
+                highlight.SetActive(false);
+            }
+            else
+            {
+                errorEffect.SetActive(false);
+                highlight.SetActive(true);
+            }
+
             if (v == 0)
             {
                 if (speed > 0) speed -= 5;
                 if (speed < 0) speed = 0;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, prevV) * speed;
+
+                
             }
             else if (v != prevV)
             {
@@ -144,7 +156,7 @@ public class MoveRacket : MonoBehaviour
             accFactor = 1;
             prevV = 0;
 
-    
+            
             GetComponent<Rigidbody2D>().velocity = new Vector2(0, prevV) * speed;
         }
 
@@ -153,6 +165,7 @@ public class MoveRacket : MonoBehaviour
     void StopRacket()
     {
         highlight.SetActive(false);
+        errorEffect.SetActive(false);
         racketState = false;
 
     }
