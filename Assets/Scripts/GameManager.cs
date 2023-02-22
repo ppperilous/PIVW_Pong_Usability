@@ -33,12 +33,15 @@ public class GameManager : MonoBehaviour
 
     public string playerWinOrLose;
 
+    private BallMovement ballStats;
+   
     void Start()
     {
         trialNum = GlobalControl.Instance.trialNum;
         trialName = GlobalControl.Instance.trialName;
         trials = GlobalControl.Instance.trials;
         initials_input = SaveInitials.name;
+        ballStats = GameObject.Find("Ball").GetComponent<BallMovement>();
     }
 
     void Update()
@@ -77,7 +80,6 @@ public class GameManager : MonoBehaviour
         this.totalScoreText.text = _totalScore.ToString();
         this.ball.ResetPosition();
         StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
-       
         ResetRound();
 
     }
@@ -85,7 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetRound()
     {
-        if (_totalScore == winningScore || Timer.currentTime <= 0)
+        if (Timer.currentTime <= 0)
         {
             if (_playerScore > _computerScore)
             {
@@ -100,6 +102,10 @@ public class GameManager : MonoBehaviour
             Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", _computerScore.ToString());
             Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", _totalScore.ToString());
             Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", _playerScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ",  ballStats.L_missCounter_Over.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ", ballStats.L_missCounter_Under.ToString());
+            Debug.Log("misses over " + ballStats.L_missCounter_Over);
+
             Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
             Debug.Log("Round Over!");
             SaveGame();

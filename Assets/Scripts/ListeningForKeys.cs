@@ -64,8 +64,8 @@ public class ListeningForKeys : MonoBehaviour
         {         
             w_timeLog_A = Time.deltaTime;
             w_timeDifference = w_timeLog_A - w_timeLog_B;
-            Debug.Log("the time since last press is " + w_timeDifference);
-            Debug.Log("now w has been pressed " + wCounter + " times");
+         //   Debug.Log("the time since last press is " + w_timeDifference);
+         //   Debug.Log("now w has been pressed " + wCounter + " times");
 
             if (w_timeDifference <= 0.003) {
                 wCounter++;
