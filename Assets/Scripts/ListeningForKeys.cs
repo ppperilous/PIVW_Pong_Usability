@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class ListeningForKeys : MonoBehaviour
 {
@@ -8,10 +9,11 @@ public class ListeningForKeys : MonoBehaviour
     private bool theyDeadlocked;
     private float deadlockedTime;
 
+    private float counterForTaps;
+
     private bool wIsDown;
     private bool downIsDown;
 
-    private float counterForTaps;
     private bool wTapListener;
     private float wCounter;
     private float w_timeLog_A;
@@ -19,19 +21,32 @@ public class ListeningForKeys : MonoBehaviour
     private float maxTimeBetweenClicks_W;
     private float w_timeDifference;
 
+    private bool dTapListener;
+    private float dCounter;
+    private float d_timeLog_A;
+    private float d_timeLog_B;
+    private float maxTimeBetweenClicks_D;
+    private float d_timeDifference;
 
-
+    Stopwatch sw = new();
+    Stopwatch sw2 = new();
 
     // Start is called before the first frame update
     void Start()
     {
+        sw2.Start();
         wIsDown = false;
         downIsDown = false;
         theyDeadlocked = false;
         wTapListener = false;
+        dTapListener = false;
+        deadlockedTime = 0;
         wCounter = 0;
         w_timeLog_B = 0;
         maxTimeBetweenClicks_W = 0.25f;
+        dCounter = 0;
+        d_timeLog_B = 0;
+        maxTimeBetweenClicks_D = 0.25f;
     }
 
     // Update is called once per frame
@@ -44,42 +59,77 @@ public class ListeningForKeys : MonoBehaviour
 
     private void listeningForDeadlock()
     {
-        if (Input.GetKeyDown("w") && Input.GetKeyDown("down"))
+        if (Input.GetKey("w") && Input.GetKey("down"))
         {
+            sw.Start();
             theyDeadlocked = true;
-            deadlockedTime = +Time.deltaTime;
-            Debug.Log("Pressed Both");
+            //deadlockedTime += Time.deltaTime;
+            UnityEngine.Debug.Log("Pressed Both");
         }
 
-        if (theyDeadlocked == true && (Input.GetKeyUp("w") || Input.GetKeyUp("down")))
+        if (theyDeadlocked && (!Input.GetKey("w") || !Input.GetKey("down")))
         {
+            deadlockedTime = sw.ElapsedMilliseconds;
+            sw.Reset();
             theyDeadlocked = false;
+            UnityEngine.Debug.Log("Deadlocked ");
+            UnityEngine.Debug.Log(deadlockedTime.ToString());
             Tinylytics.AnalyticsManager.LogCustomMetric("Deadlocked " , deadlockedTime.ToString());
             deadlockedTime = 0;
         }
     }
+
     private void trackingTappers_W()
     {
         if (Input.GetKeyDown("w"))
-        {         
-            w_timeLog_A = Time.deltaTime;
+        {
+            w_timeLog_A = sw2.ElapsedMilliseconds;
             w_timeDifference = w_timeLog_A - w_timeLog_B;
-            Debug.Log("the time since last press is " + w_timeDifference);
-            Debug.Log("now w has been pressed " + wCounter + " times");
+            UnityEngine.Debug.Log("the time since last press is " + w_timeDifference);
+            Tinylytics.AnalyticsManager.LogCustomMetric("W_SimultaneiusPress_TimeDifference", w_timeDifference.ToString());
+            UnityEngine.Debug.Log("now w has been pressed " + wCounter + " times");
 
-            if (w_timeDifference <= 0.003) {
+            if (w_timeDifference <= 100) {
                 wCounter++;
-                w_timeLog_B = Time.deltaTime;
+                w_timeLog_B = w_timeLog_A;
             }
             else 
             {
-                Debug.Log("W was tapped " + wCounter + " times");
+                UnityEngine.Debug.Log("W was tapped " + wCounter + " times");
+                Tinylytics.AnalyticsManager.LogCustomMetric("W_Press_Count", wCounter.ToString());
                 wCounter = 0;
                 w_timeLog_A = 0;
                 w_timeLog_B = 0;
             }
         }
     }
+
+    private void trackingTappers_D()
+    {
+        if (Input.GetKeyDown("down"))
+        {
+            d_timeLog_A = sw2.ElapsedMilliseconds;
+            d_timeDifference = d_timeLog_A - d_timeLog_B;
+            UnityEngine.Debug.Log("the time since last press is " + d_timeDifference);
+            Tinylytics.AnalyticsManager.LogCustomMetric("W_SimultaneiusPress_TimeDifference", d_timeDifference.ToString());
+            UnityEngine.Debug.Log("now d has been pressed " + dCounter + " times");
+
+            if (d_timeDifference <= 100)
+            {
+                dCounter++;
+                d_timeLog_B = d_timeLog_A;
+            }
+            else
+            {
+                UnityEngine.Debug.Log("d was tapped " + dCounter + " times");
+                Tinylytics.AnalyticsManager.LogCustomMetric("d_Press_Count", dCounter.ToString());
+                dCounter = 0;
+                d_timeLog_A = 0;
+                d_timeLog_B = 0;
+            }
+        }
+    }
+
     public void listeningForWKey()
     {
         if (Input.GetKeyDown("w"))
