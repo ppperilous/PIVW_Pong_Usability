@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 public class BallMovement : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class BallMovement : MonoBehaviour
     GameObject RacketRight;
 
     private Component racketScript;
+
+    private Transform racketLeft_pos;
+    public float L_missCounter_Over;
+    public float L_missCounter_Under;
 
     //Create a stop watch
     Stopwatch sw = new Stopwatch();
@@ -26,6 +31,8 @@ public class BallMovement : MonoBehaviour
     {
         RacketLeft = GameObject.Find("RacketLeft");
         RacketRight = GameObject.Find("RacketRight");
+        racketLeft_pos = GameObject.Find("RacketRight").transform;
+       
 
         // Stop movement of Left Racket (as ball moves to the right
         RacketLeft.SendMessage("StopRacket");
@@ -110,9 +117,16 @@ public class BallMovement : MonoBehaviour
         // Hit the left Wall?
         if (col.gameObject.name == "WallLeft")
         {
+           // Debug.Log("Ball is at " + this.transform.position.y + " and racket is " + racketLeft_pos.position.y);
+             if (this.transform.position.y >= racketLeft_pos.position.y)
+            {
+                L_missCounter_Over ++;
+}
+            else
+                L_missCounter_Under ++;
 
-            //Reposition ball to center
-            float yPos = Random.Range(-5, 12);
+    //Reposition ball to center
+    float yPos = Random.Range(-5, 12);
             transform.position = new Vector2(0, yPos);
 
             //Reduce speed a little, if it is more than 20
