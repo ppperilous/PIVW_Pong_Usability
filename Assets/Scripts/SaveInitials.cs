@@ -22,7 +22,7 @@ public class SaveInitials : MonoBehaviour
     {
         name = _inputField.text;
         //Debug.Log(name);
-        //Tinylytics.AnalyticsManager.LogCustomMetric("Initials", name);
+        Tinylytics.AnalyticsManager.LogCustomMetric("Initials", name); 
     }
 
     void Update()

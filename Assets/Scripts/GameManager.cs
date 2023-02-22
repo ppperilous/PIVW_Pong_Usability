@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetRound()
     {
-        if (_totalScore >= winningScore || Timer.currentTime == 0)
+        if (_totalScore >= winningScore || Timer.currentTime <= 0)
         {
             if (_playerScore > _computerScore)
             {
