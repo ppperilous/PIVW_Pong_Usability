@@ -69,11 +69,11 @@ public class ListeningForKeys : MonoBehaviour
 
             if (w_timeDifference <= 0.003) {
                 wCounter++;
-                w_timeLog_B = Time.deltaTime;
+                w_timeLog_B = w_timeLog_A;
             }
             else 
             {
-                Debug.Log("W was tapped " + wCounter + " times");
+             //   Debug.Log("W was tapped " + wCounter + " times");
                 wCounter = 0;
                 w_timeLog_A = 0;
                 w_timeLog_B = 0;

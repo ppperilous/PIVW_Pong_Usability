@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 public class BallMovement : MonoBehaviour
 {
 
-    public float speed = 20;
+    public float speed = 15;
 
     GameObject RacketLeft;
     GameObject RacketRight;
@@ -22,10 +22,33 @@ public class BallMovement : MonoBehaviour
     Stopwatch sw = new Stopwatch();
 
     //Number of ms before speed is incremented
-    public float period = 3000;
+    public float period = 4000;
 
     //Stores current ms since last speed update
     float currentMs = 0;
+
+    public void ResetPosition()
+    {
+        this.GetComponent<Rigidbody>().velocity = Vector2.zero;
+        this.GetComponent<Rigidbody>().position = Vector2.zero;
+    }
+
+    public void AddStartingForce()
+    {
+        // Flip a coin to determine if the ball starts left or right
+        int direction = Random.Range(-1, 1);
+        if (direction == -1)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
+
+        }
+
+    }
 
     void Start()
     {
@@ -51,7 +74,7 @@ public class BallMovement : MonoBehaviour
         float ms = sw.ElapsedMilliseconds;
         if (ms - currentMs > period)
         {
-            speed++;
+            speed ++;
             currentMs = ms;
         }
     }
@@ -125,15 +148,16 @@ public class BallMovement : MonoBehaviour
             else
                 L_missCounter_Under ++;
 
-    //Reposition ball to center
-    float yPos = Random.Range(-5, 12);
-            transform.position = new Vector2(0, yPos);
+         //Reposition ball to center
+          float yPos = Random.Range(-5, 12);
+          transform.position = new Vector2(0, yPos);
 
             //Reduce speed a little, if it is more than 20
             if (speed > 20) speed -= 10;
 
             //Launch ball towards the opp side (ie. right side)
-            GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+            pauseBall(1);
+            //GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
 
             //Deactivate left racket, activate right racket
             RacketLeft.SendMessage("StopRacket");
@@ -151,9 +175,10 @@ public class BallMovement : MonoBehaviour
             transform.position = new Vector2(0, 0);
 
             //Reduce speed a little, if it is more than 20
-            if (speed > 20) speed -= 10;
+             if (speed > 20) speed -= 10;
 
             //Launch ball towards the opp side (ie. left side)
+            pauseBall(0);
             GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
 
             //Deactivate right racket, activate right racket
@@ -164,5 +189,18 @@ public class BallMovement : MonoBehaviour
 
         }
 
+    }
+    private IEnumerator pauseBall(float balldirection)
+    {
+        yield return new WaitForSeconds(5f);
+
+        if (balldirection == 0)
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+        }
     }
 }

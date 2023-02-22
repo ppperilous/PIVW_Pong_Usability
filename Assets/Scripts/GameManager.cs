@@ -8,11 +8,12 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Ball ball;
+    public BallMovement ball;
 
     public Text playerScoreText;
     public Text computerScoreText;
     public TextMeshProUGUI totalScoreText;
+    public TextMeshProUGUI debugSpeed;
 
     private int _playerScore;
     private int _computerScore;
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
         {
             trialTimer += Time.deltaTime;
         }
+        
 
     }
 
@@ -66,6 +68,7 @@ public class GameManager : MonoBehaviour
     {
         _playerScore++;
         _totalScore++;
+        this.debugSpeed.text = ballStats.speed.ToString();
         this.playerScoreText.text = _playerScore.ToString();
         this.totalScoreText.text = _totalScore.ToString();
         ResetRound();
@@ -78,8 +81,8 @@ public class GameManager : MonoBehaviour
         _totalScore--;
         this.computerScoreText.text = _computerScore.ToString();
         this.totalScoreText.text = _totalScore.ToString();
-        this.ball.ResetPosition();
-        StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
+      //  this.ball.ResetPosition();
+       // StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
         ResetRound();
 
     }
@@ -87,7 +90,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetRound()
     {
-        if (Timer.currentTime <= 0)
+        if (_totalScore >= winningScore || Timer.currentTime == 0)
         {
             if (_playerScore > _computerScore)
             {
@@ -110,7 +113,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Round Over!");
             SaveGame();
             newTrial();
-           // this.ball.ResetPosition(); //ball should stop moving once game is over
+            this.ball.ResetPosition(); //ball should stop moving once game is over
             timerIsActive = false;
             // Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialNum.ToString() + "_" + trials[trialNum-1], playerWinOrLose + "_" + trialTimer.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("playerWinOrLose", playerWinOrLose);
