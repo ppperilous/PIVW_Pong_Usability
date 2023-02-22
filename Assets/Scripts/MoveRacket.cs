@@ -30,11 +30,11 @@ public class MoveRacket : MonoBehaviour
 
     void Start()
     {
-        highlight = transform.GetChild(0).gameObject;
+        highlight = transform.GetChild(2).gameObject;
 
         //Racket Movement Effects
-        racketUpEffect = transform.GetChild(3).gameObject;
-        racketDownEffect = transform.GetChild(4).gameObject;
+        racketUpEffect = transform.GetChild(5).gameObject;
+        racketDownEffect = transform.GetChild(6).gameObject;
         racketUpEffect.SetActive(false);
         racketDownEffect.SetActive(false);
 
@@ -46,8 +46,8 @@ public class MoveRacket : MonoBehaviour
         ////////////////////////////////////////////////////
         //REQUIRED FOR RACKET PONG
         //Arrows for RacketPong
-        upArrow = transform.GetChild(1).gameObject;
-        downArrow = transform.GetChild(2).gameObject;
+        upArrow = transform.GetChild(3).gameObject;
+        downArrow = transform.GetChild(4).gameObject;
         downArrow.SetActive(false);
         upArrow.SetActive(false);
 
@@ -61,10 +61,8 @@ public class MoveRacket : MonoBehaviour
         downMagnetWaves.SetActive(false);
 
         //Magnets
-        //upMagnet = transform.GetChild(5).gameObject;
-        //downMagnet = transform.GetChild(6).gameObject;
-        //upMagnet.SetActive(false);
-        //downMagnet.SetActive(false);
+        upMagnet.SetActive(false);
+        downMagnet.SetActive(false);
 
     }
 
@@ -83,8 +81,8 @@ public class MoveRacket : MonoBehaviour
             upArrow.SetActive(false);
 
             ////Magnet Pong
-            downMagnetWaves.SetActive(true);
-            upMagnetWaves.SetActive(false);
+            //downMagnetWaves.SetActive(true);
+            //upMagnetWaves.SetActive(false);
 
         }
         else if ((v > 0) && (racketState))
@@ -97,8 +95,8 @@ public class MoveRacket : MonoBehaviour
             upArrow.SetActive(true);
 
             ////Magnet Pong
-            downMagnetWaves.SetActive(false);
-            upMagnetWaves.SetActive(true);
+            //downMagnetWaves.SetActive(false);
+            //upMagnetWaves.SetActive(true);
 
         }
         else
@@ -111,8 +109,8 @@ public class MoveRacket : MonoBehaviour
             upArrow.SetActive(false);
 
             ////Magnet Pong
-            downMagnetWaves.SetActive(false);
-            upMagnetWaves.SetActive(false);
+            //downMagnetWaves.SetActive(false);
+            //upMagnetWaves.SetActive(false);
         }
 
 
