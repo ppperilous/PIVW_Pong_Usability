@@ -395,10 +395,7 @@ MonoBehaviour:
   totalScoreText: {fileID: 1474086355}
   trialNum: 0
   trialName: 
-  trials:
-  - 
-  - 
-  - 
+  trials: []
   winningScore: 4
   trialTimer: 0
   playerWinOrLose: 
