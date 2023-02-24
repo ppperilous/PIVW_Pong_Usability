@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
+using diag = System.Diagnostics;
+
 
 public class ListeningForKeys : MonoBehaviour
 {
-
+    [SerializeField] private Animator aniController;
     private bool theyDeadlocked;
     private float deadlockedTime;
 
@@ -74,7 +76,7 @@ public class ListeningForKeys : MonoBehaviour
             theyDeadlocked = false;
             UnityEngine.Debug.Log("Deadlocked ");
             UnityEngine.Debug.Log(deadlockedTime.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Deadlocked " , deadlockedTime.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Deadlocked ", deadlockedTime.ToString());
             deadlockedTime = 0;
         }
     }
@@ -89,11 +91,12 @@ public class ListeningForKeys : MonoBehaviour
             Tinylytics.AnalyticsManager.LogCustomMetric("W_SimultaneiusPress_TimeDifference", w_timeDifference.ToString());
             UnityEngine.Debug.Log("now w has been pressed " + wCounter + " times");
 
-            if (w_timeDifference <= 100) {
+            if (w_timeDifference <= 100)
+            {
                 wCounter++;
                 w_timeLog_B = w_timeLog_A;
             }
-            else 
+            else
             {
                 UnityEngine.Debug.Log("W was tapped " + wCounter + " times");
                 Tinylytics.AnalyticsManager.LogCustomMetric("W_Press_Count", wCounter.ToString());
@@ -143,5 +146,17 @@ public class ListeningForKeys : MonoBehaviour
         }
     }
 
-    
+    private void listeningforzoom()
+    {
+        if (Input.GetKeyDown("d"))
+        {
+            aniController.SetBool("L_RacketPlay", true);
+            //UnityEngine.Debug.Log("zoom? " + aniController.L_RacketPlay);
+        }
+        else
+        {
+            aniController.SetBool("L_RacketPlay", false);
+        }
+
+    }
 }

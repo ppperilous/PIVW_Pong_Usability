@@ -9,9 +9,10 @@ public class Ball : MonoBehaviour
     public float speed = 30;
     GameObject RacketLeft;
     GameObject RacketRight;
+    Animator racketHiLite;
     private Component racketScript;
+   
 
-    public Transform Lracket_pos;
     public Vector2 LracketRelative;
 
     private void Awake()
@@ -33,7 +34,10 @@ public class Ball : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
         RacketLeft = GameObject.Find("RacketLeft");
         RacketRight = GameObject.Find("RacketRight");
-       // Lracket_pos = RacketLeft.InverseTransformPoint(transform.position);
+        racketHiLite = GetComponent<Animator>();
+        
+
+
     }
 
         public void AddStartingForce()
@@ -75,6 +79,11 @@ public class Ball : MonoBehaviour
         // Hit the left Racket?
         if (col.gameObject.name == "RacketLeft")
         {
+
+            racketHiLite.SetBool("L_RacketPlay", true);
+            
+
+
             // Calculate hit Factor
             float y = hitFactor(transform.position,
                                 col.transform.position,
