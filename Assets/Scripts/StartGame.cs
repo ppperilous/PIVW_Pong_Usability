@@ -11,15 +11,19 @@ public class StartGame : MonoBehaviour
     public string trialName;
     public List<string> trials = new();
     public int winningScore;
+    public static string initials_input;
 
     private void Start()
     {
+        initials_input = SaveInitials.name;
 
+        string temp;
+        int randomIndex;
         //shuffle the list when the game starts
         for (int i = 0; i < trials.Count; i++)
         {
-            string temp = trials[i];
-            int randomIndex = Random.Range(i, trials.Count);
+            temp = trials[i];
+            randomIndex = Random.Range(i, trials.Count);
             trials[i] = trials[randomIndex];
             trials[randomIndex] = temp;
         }
@@ -42,9 +46,15 @@ public class StartGame : MonoBehaviour
     {
         trialNum = 0; //set the trial number to the first item in the list
         GlobalControl.Instance.trialNum = trialNum; //this will set the trialNum to the first in the list
-        //Tinylytics.AnalyticsManager.LogCustomMetric("Game Start", "Start " + System.DateTime.Now);
         trialName = GlobalControl.Instance.trials[trialNum];
+
+        //Log Game Start & Trial Start
+        int actualTrialNum = trialNum + 1; //for human understanding
+        Tinylytics.AnalyticsManager.LogCustomMetric("Trial Start", initials_input + "_" + "Trial#" + actualTrialNum.ToString() + "_" + System.DateTime.Now);
+
+        //Load Scene
         SceneManager.LoadScene(trialName);
         //Debug.Log(trialName);
+
     }
 }

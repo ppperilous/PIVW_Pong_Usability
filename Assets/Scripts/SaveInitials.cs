@@ -21,8 +21,7 @@ public class SaveInitials : MonoBehaviour
     public void InputName()
     {
         name = _inputField.text;
-        //Debug.Log(name);
-        //Tinylytics.AnalyticsManager.LogCustomMetric("Initials", name);
+        Tinylytics.AnalyticsManager.LogCustomMetric("Initials", name);
     }
 
     void Update()

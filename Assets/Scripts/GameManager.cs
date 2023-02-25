@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
     public Ball ball;
 
     public Text playerScoreText;
-    public Text computerScoreText;
+    public Text missesText;
     public TextMeshProUGUI totalScoreText;
 
     private int _playerScore;
-    private int _computerScore;
+    private int _misses;
     private int _totalScore;
 
     public static string initials_input;
@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public List<string> trials;
 
     public int winningScore; //set this value in both scenes!
- 
 
     private string sceneName;
 
@@ -39,6 +38,7 @@ public class GameManager : MonoBehaviour
    
     void Start()
     {
+        
         trialNum = GlobalControl.Instance.trialNum;
         trialName = GlobalControl.Instance.trialName;
         trials = GlobalControl.Instance.trials;
@@ -73,14 +73,13 @@ public class GameManager : MonoBehaviour
         this.playerScoreText.text = _playerScore.ToString();
         this.totalScoreText.text = _totalScore.ToString();
         ResetRound();
-        
     }
 
-    public void ComputerScores()
+    public void PlayerMisses()
     {
-        _computerScore++;
+        _misses++;
         _totalScore--;
-        this.computerScoreText.text = _computerScore.ToString();
+        this.missesText.text = _misses.ToString();
         this.totalScoreText.text = _totalScore.ToString();
         //this.ball.ResetPosition();
         StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
@@ -95,7 +94,9 @@ public class GameManager : MonoBehaviour
 
         if (Timer.currentTime >= 10)
         {
+            //TRIAL IS OVER
             Debug.Log("In Reset Round if Statement");
+
             //if (_playerScore > _computerScore)
             //{
             //    playerWinOrLose = "win";
@@ -104,21 +105,33 @@ public class GameManager : MonoBehaviour
             //{
             //    playerWinOrLose = "lose";
             //}
-            trialNum = trialNum + 1;
-            Tinylytics.AnalyticsManager.LogCustomMetric("trialName", trialName);
-            //Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", _computerScore.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", _totalScore.ToString());
+
+            trialNum ++;
+
+            //Log end of trial
+            Tinylytics.AnalyticsManager.LogCustomMetric("Trial End", initials_input + "_" + "Trial#" + trialNum.ToString() + "_" + trialName);
+
+            //Log score of trial
+            Tinylytics.AnalyticsManager.LogCustomMetric("Trial Score", initials_input + "_" + "Trial#" + trialNum.ToString() + "_" + _totalScore.ToString());
+
+            //Log misses of trial
+            Tinylytics.AnalyticsManager.LogCustomMetric("Trial Misses", initials_input + "_" + "Trial#" + trialNum.ToString() + "_" + _misses.ToString());
+
+            //EXTRAS
             //Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", _playerScore.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ",  ballStats.L_missCounter_Over.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ", ballStats.L_missCounter_Under.ToString());
             //Debug.Log("misses over " + ballStats.L_missCounter_Over);
+            //Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
 
-            Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
             Debug.Log("Round Over!");
+
             SaveGame();
             newTrial();
+
            // this.ball.ResetPosition(); //ball should stop moving once game is over
             timerIsActive = false;
+
             // Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialNum.ToString() + "_" + trials[trialNum-1], playerWinOrLose + "_" + trialTimer.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("playerWinOrLose", playerWinOrLose);
 
@@ -129,7 +142,6 @@ public class GameManager : MonoBehaviour
           // StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
         }
 
-        
     }
 
     void newTrial()
@@ -154,6 +166,7 @@ public class GameManager : MonoBehaviour
     void endGame()
     {
         //if you want to know how lond the entire set of trials took, you can add your tinyLytics call here
+
         sceneName = "ending"; //this name is used in the Coroutine, which is basically just a pause timer for 3 seconds.
         StartCoroutine(WaitForSceneLoad());
 
