@@ -46,9 +46,8 @@ public class Interstitial : MonoBehaviour
 
     void newTrial()
     {
-
-        Tinylytics.AnalyticsManager.LogCustomMetric("New Trial Number: ", trialNum.ToString());
-        Tinylytics.AnalyticsManager.LogCustomMetric("New Trial Name: ", trialName);
+        int actualTrialNum = trialNum + 1;
+        Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + actualTrialNum.ToString() + "_" + "TrialStartTime", "Start " + System.DateTime.Now);
 
         SceneManager.LoadScene(trialName);
 
