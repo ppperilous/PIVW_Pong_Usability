@@ -15,10 +15,11 @@ public class StartGame : MonoBehaviour
 
     private void Start()
     {
-        initials_input = SaveInitials.name;
+        initials_input = save2Initials.roundName;
 
         string temp;
         int randomIndex;
+
         //shuffle the list when the game starts
         for (int i = 0; i < trials.Count; i++)
         {
@@ -50,11 +51,11 @@ public class StartGame : MonoBehaviour
 
         //Log Game Start & Trial Start
         int actualTrialNum = trialNum + 1; //for human understanding
-        Tinylytics.AnalyticsManager.LogCustomMetric("Trial Start", initials_input + "_" + "Trial#" + actualTrialNum.ToString() + "_" + System.DateTime.Now);
+        //Tinylytics.AnalyticsManager.LogCustomMetric("TrialStart", initials_input + "_" + "Trial#" + actualTrialNum.ToString());
+        Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialName + "_" + actualTrialNum.ToString(), "TrialStartTime");
 
         //Load Scene
         SceneManager.LoadScene(trialName);
-        //Debug.Log(trialName);
 
     }
 }

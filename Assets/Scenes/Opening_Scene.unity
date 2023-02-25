@@ -359,6 +359,10 @@ MonoBehaviour:
   - blue
   - blue
   - blue
+  - red
+  - red
+  - blue
+  - blue
   winningScore: 0
 --- !u!4 &1206575980
 Transform:

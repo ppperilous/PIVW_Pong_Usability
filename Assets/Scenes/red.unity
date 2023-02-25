@@ -391,7 +391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 0}
   playerScoreText: {fileID: 383267725}
-  computerScoreText: {fileID: 496432321}
+  missesText: {fileID: 0}
   totalScoreText: {fileID: 1474086355}
   trialNum: 0
   trialName: 
@@ -684,7 +684,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &383267724
 RectTransform:
   m_ObjectHideFlags: 0
@@ -899,7 +899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &496432320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1763,7 +1763,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 263362626}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ComputerScores
+        m_MethodName: PlayerMisses
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2181,7 +2181,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 263362626}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ComputerScores
+        m_MethodName: PlayerMisses
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
