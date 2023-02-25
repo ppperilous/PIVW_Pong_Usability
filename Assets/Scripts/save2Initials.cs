@@ -11,7 +11,7 @@ public class save2Initials : MonoBehaviour
     TMP_InputField _inputField;
     TMP_InputField _inputField2;
 
-    public static string name;
+    public static string name1;
     public static string name2;
 
     public static string roundName;
@@ -25,12 +25,12 @@ public class save2Initials : MonoBehaviour
 
     public void InputName()
     {
-        name = _inputField.text;
+        name1 = _inputField.text;
         name2 = _inputField2.text;
-        //Debug.Log(name);
-        Tinylytics.AnalyticsManager.LogCustomMetric("Initials", name);
-        Tinylytics.AnalyticsManager.LogCustomMetric("Initials2", name2);
-        roundName = name +"/"+name2;
+        
+        Tinylytics.AnalyticsManager.LogCustomMetric("Player1", name1);
+        Tinylytics.AnalyticsManager.LogCustomMetric("Player2", name2);
+        roundName = name1 +"/"+name2;
     }
 
     void Update()
