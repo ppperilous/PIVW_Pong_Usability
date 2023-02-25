@@ -78,7 +78,6 @@ public class ListeningForKeys : MonoBehaviour
             UnityEngine.Debug.Log("Deadlocked ");
             UnityEngine.Debug.Log(deadlockedTime.ToString());
             Tinylytics.AnalyticsManager.LogCustomMetric("Deadlocked ", deadlockedTime.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("player was  ", save2Initials.name);
             deadlockedTime = 0;
         }
     }

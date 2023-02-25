@@ -429,8 +429,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Trial X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5f1d22a25be8442d4872b00b633c5adf, type: 2}
-  m_sharedMaterial: {fileID: -3076756472126150823, guid: 5f1d22a25be8442d4872b00b633c5adf, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7e46159afdc8a2c44bc744d9092384aa, type: 2}
+  m_sharedMaterial: {fileID: -3844778302533209821, guid: 7e46159afdc8a2c44bc744d9092384aa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

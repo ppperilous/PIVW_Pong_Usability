@@ -1162,11 +1162,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Please enter both of your initials, divided by a comma, and then press
-    enter to continue
+  m_text: Please enter each player's initials below then press enter to start!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5f1d22a25be8442d4872b00b633c5adf, type: 2}
-  m_sharedMaterial: {fileID: -3076756472126150823, guid: 5f1d22a25be8442d4872b00b633c5adf, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7e46159afdc8a2c44bc744d9092384aa, type: 2}
+  m_sharedMaterial: {fileID: -3844778302533209821, guid: 7e46159afdc8a2c44bc744d9092384aa, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1190,8 +1189,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
