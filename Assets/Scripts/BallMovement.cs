@@ -20,13 +20,13 @@ public class BallMovement : MonoBehaviour
     public float L_missCounter_Under;
 
     //Create a stop watch
-    Stopwatch sw = new Stopwatch();
+    //Stopwatch sw = new Stopwatch();
 
     //Number of ms before speed is incremented
-    public float period = 3000;
+    //public float period = 3000;
 
     //Stores current ms since last speed update
-    float currentMs = 0;
+    //float currentMs = 0;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class BallMovement : MonoBehaviour
         GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
 
         //Start stopwatch
-        sw.Start();
+        //sw.Start();
     }
 
     void AddStartingForce()
@@ -61,16 +61,16 @@ public class BallMovement : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //increments speed at the set period
-        float ms = sw.ElapsedMilliseconds;
-        if (ms - currentMs > period)
-        {
-            speed++;
-            currentMs = ms;
-        }
-    }
+    //void Update()
+    //{
+    //    //increments speed at the set period
+    //    float ms = sw.ElapsedMilliseconds;
+    //    if (ms - currentMs > period)
+    //    {
+    //        //speed++;
+    //        currentMs = ms;
+    //    }
+    //}
 
     float hitFactor(Vector2 ballPos, Vector2 racketPos,
                     float racketHeight)
@@ -146,7 +146,7 @@ public class BallMovement : MonoBehaviour
             transform.position = new Vector2(0, yPos);
 
             //Reduce speed a little, if it is more than 20
-            if (speed > 20) speed -= 10;
+            //if (speed > 20) speed -= 10;
 
             //Launch ball towards the opp side (ie. right side)
             GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
@@ -165,7 +165,7 @@ public class BallMovement : MonoBehaviour
             transform.position = new Vector2(0, 0);
 
             //Reduce speed a little, if it is more than 20
-            if (speed > 20) speed -= 10;
+            //if (speed > 20) speed -= 10;
 
             //Launch ball towards the opp side (ie. left side)
             GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;

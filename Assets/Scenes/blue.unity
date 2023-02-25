@@ -1634,7 +1634,6 @@ MonoBehaviour:
   speed: 20
   L_missCounter_Over: 0
   L_missCounter_Under: 0
-  period: 3000
 --- !u!1 &710391959
 GameObject:
   m_ObjectHideFlags: 0
