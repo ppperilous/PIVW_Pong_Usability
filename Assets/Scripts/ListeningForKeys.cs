@@ -8,6 +8,9 @@ public class ListeningForKeys : MonoBehaviour
 
     private bool theyDeadlocked;
     private float deadlockedTime;
+    public save2Initials name;
+    public save2Initials name2;
+    public string play_d;
 
     private float counterForTaps;
 
@@ -74,7 +77,8 @@ public class ListeningForKeys : MonoBehaviour
             theyDeadlocked = false;
             UnityEngine.Debug.Log("Deadlocked ");
             UnityEngine.Debug.Log(deadlockedTime.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Deadlocked " , deadlockedTime.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Deadlocked ", deadlockedTime.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("player was  ", save2Initials.name);
             deadlockedTime = 0;
         }
     }
@@ -86,7 +90,7 @@ public class ListeningForKeys : MonoBehaviour
             w_timeLog_A = sw2.ElapsedMilliseconds;
             w_timeDifference = w_timeLog_A - w_timeLog_B;
             UnityEngine.Debug.Log("the time since last press is " + w_timeDifference);
-            Tinylytics.AnalyticsManager.LogCustomMetric("W_SimultaneiusPress_TimeDifference", w_timeDifference.ToString());
+         //   Tinylytics.AnalyticsManager.LogCustomMetric("W_SimultaneiusPress_TimeDifference", w_timeDifference.ToString());
             UnityEngine.Debug.Log("now w has been pressed " + wCounter + " times");
 
             if (w_timeDifference <= 100) {
@@ -96,7 +100,7 @@ public class ListeningForKeys : MonoBehaviour
             else 
             {
                 UnityEngine.Debug.Log("W was tapped " + wCounter + " times");
-                Tinylytics.AnalyticsManager.LogCustomMetric("W_Press_Count", wCounter.ToString());
+            //    Tinylytics.AnalyticsManager.LogCustomMetric("W_Press_Count", wCounter.ToString());
                 wCounter = 0;
                 w_timeLog_A = 0;
                 w_timeLog_B = 0;

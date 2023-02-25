@@ -105,10 +105,10 @@ public class GameManager : MonoBehaviour
             //    playerWinOrLose = "lose";
             //}
             trialNum = trialNum + 1;
-            Tinylytics.AnalyticsManager.LogCustomMetric("trialName", trialName);
-            Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", _computerScore.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", _totalScore.ToString());
-            Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", _playerScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("trialName", save2Initials.roundName+"_"+trialName);
+            Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", save2Initials.roundName + "_" + _computerScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", save2Initials.roundName + "_" + _totalScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", save2Initials.roundName + "_" + _playerScore.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ",  ballStats.L_missCounter_Over.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ", ballStats.L_missCounter_Under.ToString());
             //Debug.Log("misses over " + ballStats.L_missCounter_Over);
