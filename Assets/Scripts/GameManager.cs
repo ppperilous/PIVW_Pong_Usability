@@ -11,11 +11,11 @@ public class GameManager : MonoBehaviour
     public Ball ball;
 
     public Text playerScoreText;
-    public Text computerScoreText;
+    //public Text computerScoreText;
     public TextMeshProUGUI totalScoreText;
 
     private int _playerScore;
-    private int _computerScore;
+    private int _misses;
     private int _totalScore;
 
     public static string initials_input;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         trialNum = GlobalControl.Instance.trialNum;
         trialName = GlobalControl.Instance.trialName;
         trials = GlobalControl.Instance.trials;
-        initials_input = SaveInitials.name;
+        initials_input = save2Initials.roundName;
         ballStats = GameObject.Find("Ball").GetComponent<BallMovement>();
     }
 
@@ -78,9 +78,9 @@ public class GameManager : MonoBehaviour
 
     public void ComputerScores()
     {
-        _computerScore++;
+        _misses++;
         _totalScore--;
-        this.computerScoreText.text = _computerScore.ToString();
+        //this.computerScoreText.text = _computerScore.ToString();
         this.totalScoreText.text = _totalScore.ToString();
         //this.ball.ResetPosition();
         StartCoroutine(pauseBall()); //waits .5 sec to serve the ball
@@ -96,32 +96,35 @@ public class GameManager : MonoBehaviour
         if (Timer.currentTime >= 10)
         {
             Debug.Log("In Reset Round if Statement");
-            //if (_playerScore > _computerScore)
-            //{
-            //    playerWinOrLose = "win";
-            //}
-            //if (_playerScore < _computerScore)
-            //{
-            //    playerWinOrLose = "lose";
-            //}
-            trialNum = trialNum + 1;
-          //  Tinylytics.AnalyticsManager.LogCustomMetric("trialName", save2Initials.roundName+"_"+trialName);
-        //    Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString(), _computerScore + "_" + _playerScore + "_" + _totalScore);
-         //  Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", save2Initials.roundName + "_" + _computerScore.ToString());
-         //   Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", save2Initials.roundName + "_" + _totalScore.ToString());
-          //  Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", save2Initials.roundName + "_" + _playerScore.ToString());
-            //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ",  ballStats.L_missCounter_Over.ToString());
-            //Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ", ballStats.L_missCounter_Under.ToString());
-            //Debug.Log("misses over " + ballStats.L_missCounter_Over);
 
-         //   Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
+            trialNum = trialNum + 1;
+
+            int tempTrialNum = trialNum; //so that tinylytics doesn't mess with trialNum
+
+            //Log Trial End
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "TrialEndTime", "End " + System.DateTime.Now);
+
+            //Log Trial's Misses and Scores
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "Score-Misses", _misses + "_" + _totalScore);
+
+            //  Tinylytics.AnalyticsManager.LogCustomMetric("trialName", save2Initials.roundName+"_"+trialName);
+            //  Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString(), _computerScore + "_" + _playerScore + "_" + _totalScore);
+            //  Tinylytics.AnalyticsManager.LogCustomMetric("Computer Score", save2Initials.roundName + "_" + _computerScore.ToString());
+            //  Tinylytics.AnalyticsManager.LogCustomMetric("Total Score", save2Initials.roundName + "_" + _totalScore.ToString());
+            //  Tinylytics.AnalyticsManager.LogCustomMetric("Player Score", save2Initials.roundName + "_" + _playerScore.ToString());
+            //  Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ",  ballStats.L_missCounter_Over.ToString());
+            //  Tinylytics.AnalyticsManager.LogCustomMetric("Left Wall Misses Above Racket ", ballStats.L_missCounter_Under.ToString());
+            //  Debug.Log("misses over " + ballStats.L_missCounter_Over);
+            //  Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
+
             Debug.Log("Round Over!");
             SaveGame();
             newTrial();
-           // this.ball.ResetPosition(); //ball should stop moving once game is over
+
+            // this.ball.ResetPosition(); //ball should stop moving once game is over
             timerIsActive = false;
             // Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialNum.ToString() + "_" + trials[trialNum-1], playerWinOrLose + "_" + trialTimer.ToString());
-            //Tinylytics.AnalyticsManager.LogCustomMetric("playerWinOrLose", playerWinOrLose);
+            // Tinylytics.AnalyticsManager.LogCustomMetric("playerWinOrLose", playerWinOrLose);
 
         }
         else
