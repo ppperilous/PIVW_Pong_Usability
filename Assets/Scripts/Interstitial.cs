@@ -41,7 +41,7 @@ public class Interstitial : MonoBehaviour
     void MessagePlayer()
     {
         var _trialNumberForHumans = trialNum + 1; //lol this is because trialNum starts at 0 (as do all array values) but people don't start counting with zero...mostly...
-        message.text = "trial " + _trialNumberForHumans + "/10" + "\n" +"Press space to begin";
+        message.text = "Trial " + _trialNumberForHumans + "/10";
     }
 
     void newTrial()
