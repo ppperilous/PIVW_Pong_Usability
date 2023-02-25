@@ -105,17 +105,17 @@ public class GameManager : MonoBehaviour
             //    playerWinOrLose = "lose";
             //}
 
-            trialNum ++;
-
+            
+            int actualTrialNum = trialNum + 1;
             //Log end of trial
-            Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialName + "_" + trialNum.ToString() + "_" + "TrialEndTime", System.DateTime.UtcNow.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialName + "_" + actualTrialNum.ToString() + "_" + "TrialEndTime", System.DateTime.UtcNow.ToString());
 
             //Log score of trial
-            Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialName + "_" + trialNum.ToString() + "_" + "TrialScore", _totalScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialName + "_" + actualTrialNum.ToString() + "_" + "TrialScore", _totalScore.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("Trial Score", initials_input + "_" + "Trial#" + trialNum.ToString() + "_" + _totalScore.ToString());
 
             //Log misses of trial
-            Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialName + "_" + trialNum.ToString() + "_" + "TrialMisses", _misses.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialName + "_" + actualTrialNum.ToString() + "_" + "TrialMisses", _misses.ToString());
             //Tinylytics.AnalyticsManager.LogCustomMetric("Trial Misses", initials_input + "_" + "Trial#" + trialNum.ToString() + "_" + _misses.ToString());
 
             //EXTRAS
@@ -148,6 +148,8 @@ public class GameManager : MonoBehaviour
     void newTrial()
     {
         Debug.Log("In New Trial");
+        trialNum++;
+        
         if (trialNum < trials.Count)
         {
             Debug.Log("In New Trial if Statement");
@@ -159,8 +161,9 @@ public class GameManager : MonoBehaviour
             StartCoroutine(WaitForSceneLoad());
         }
 
-        else { endGame();
-
+        else
+        {
+            endGame();
         }
 
     }
