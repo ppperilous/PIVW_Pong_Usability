@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
             Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "TrialEndTime", "End " + System.DateTime.Now);
 
             //Log Trial's Misses and Scores
-            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "Score-Misses", _misses + "_" + _totalScore);
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "Misses-and-TotalScore", _misses + "_" + _totalScore);
 
             //  Tinylytics.AnalyticsManager.LogCustomMetric("trialName", save2Initials.roundName+"_"+trialName);
             //  Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString(), _computerScore + "_" + _playerScore + "_" + _totalScore);
