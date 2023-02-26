@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
             //  Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
 
             Debug.Log("Round Over!");
-            SaveGame();
+            //SaveGame();
             newTrial();
 
             // this.ball.ResetPosition(); //ball should stop moving once game is over

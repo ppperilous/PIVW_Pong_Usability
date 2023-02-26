@@ -1630,10 +1630,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dfb2061b6a24a84b4dd0b7b45a96ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 15
   L_missCounter_Over: 0
   L_missCounter_Under: 0
-  period: 3000
+  period: 4000
 --- !u!1 &710391959
 GameObject:
   m_ObjectHideFlags: 0

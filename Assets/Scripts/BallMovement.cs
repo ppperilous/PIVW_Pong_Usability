@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 public class BallMovement : MonoBehaviour
 {
 
-    public float speed = 20;
+    public float speed = 15;
 
     GameObject RacketLeft;
     GameObject RacketRight;
@@ -23,7 +23,7 @@ public class BallMovement : MonoBehaviour
     Stopwatch sw = new Stopwatch();
 
     //Number of ms before speed is incremented
-    public float period = 3000;
+    public float period = 4000;
 
     //Stores current ms since last speed update
     float currentMs = 0;
@@ -137,16 +137,16 @@ public class BallMovement : MonoBehaviour
              if (this.transform.position.y >= racketLeft_pos.position.y)
             {
                 L_missCounter_Over ++;
-}
+            }
             else
                 L_missCounter_Under ++;
 
-    //Reposition ball to center
-    float yPos = Random.Range(-5, 12);
+            //Reposition ball to center
+            float yPos = Random.Range(-5, 12);
             transform.position = new Vector2(0, yPos);
 
             //Reduce speed a little, if it is more than 20
-            if (speed > 20) speed -= 10;
+            if (speed > 20) speed -= 5;
 
             //Launch ball towards the opp side (ie. right side)
             GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
@@ -165,7 +165,7 @@ public class BallMovement : MonoBehaviour
             transform.position = new Vector2(0, 0);
 
             //Reduce speed a little, if it is more than 20
-            if (speed > 20) speed -= 10;
+            if (speed > 20) speed -= 5;
 
             //Launch ball towards the opp side (ie. left side)
             GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
