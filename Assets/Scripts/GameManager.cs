@@ -111,12 +111,11 @@ public class GameManager : MonoBehaviour
             Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString() + "_" + "MissesOverOrUnderRacket", "LeftWallOver:" + ballStats.L_missCounter_Over.ToString() + "_" + "LeftWallUnder:_" + ballStats.L_missCounter_Under.ToString() + "_" + "RightWallOver:_" + ballStats.R_missCounter_Over.ToString() + "_" + "RightWallUnder:_" + ballStats.R_missCounter_Under.ToString());
 
             //Log Rapid Presses
-            //Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString() + "_" + "RapidPress", "D" + listener.d_totalRapidPresses + "W" + listener.w_totalRapidPresses);
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString() + "_" + "RapidPress", "D_" + ListeningForKeys.d_totalRapidPresses + "_W_" + ListeningForKeys.w_totalRapidPresses);
 
             //Log DeadLock instances and Avg Time
             float deadLockAvg = ListeningForKeys.deadlockTotalTime /ListeningForKeys.deadlockNum;
             Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "DeadLocks", "Instances_" + ListeningForKeys.deadlockNum.ToString() + "_" + "AverageTime_" +deadLockAvg.ToString());
-
 
             //  Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
 
@@ -126,8 +125,7 @@ public class GameManager : MonoBehaviour
 
             // this.ball.ResetPosition(); //ball should stop moving once game is over
             timerIsActive = false;
-            // Tinylytics.AnalyticsManager.LogCustomMetric(initials_input + "_" + trialNum.ToString() + "_" + trials[trialNum-1], playerWinOrLose + "_" + trialTimer.ToString());
-            // Tinylytics.AnalyticsManager.LogCustomMetric("playerWinOrLose", playerWinOrLose);
+            
 
         }
         else
