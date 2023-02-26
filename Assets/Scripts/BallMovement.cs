@@ -7,7 +7,7 @@ using Debug = UnityEngine.Debug;
 public class BallMovement : MonoBehaviour
 {
 
-    public float speed = 15;
+    public float speed = 18;
 
     GameObject RacketLeft;
     GameObject RacketRight;
@@ -153,7 +153,7 @@ public class BallMovement : MonoBehaviour
             transform.position = new Vector2(0, yPos);
 
             //Reduce speed a little, if it is more than 20
-            if (speed > 20) speed -= 5;
+            if (speed > 20) speed -= 3;
 
             //Launch ball towards the opp side (ie. right side)
             GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
@@ -183,7 +183,7 @@ public class BallMovement : MonoBehaviour
             transform.position = new Vector2(0, 0);
 
             //Reduce speed a little, if it is more than 20
-            if (speed > 20) speed -= 5;
+            if (speed > 20) speed -= 3;
 
             //Launch ball towards the opp side (ie. left side)
             GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;

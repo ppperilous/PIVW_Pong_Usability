@@ -174,8 +174,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87b5869f7c4ff4bc197719f4bbc6cb5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 10
-  inverseTime: 10
+  timeRemaining: 20
+  inverseTime: 20
   timerIsRunning: 1
   ResetRound: {fileID: 263362626}
   TimeLeft: {fileID: 81499354}
@@ -763,7 +763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &481634140
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1630,9 +1630,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1dfb2061b6a24a84b4dd0b7b45a96ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 18
   L_missCounter_Over: 0
   L_missCounter_Under: 0
+  R_missCounter_Over: 0
+  R_missCounter_Under: 0
   period: 4000
 --- !u!1 &710391959
 GameObject:
@@ -3314,9 +3316,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7641ef5d76e167c41aa85cded03eddda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: {fileID: 0}
-  name2: {fileID: 0}
-  play_d: 
 --- !u!1 &1759417025
 GameObject:
   m_ObjectHideFlags: 0
