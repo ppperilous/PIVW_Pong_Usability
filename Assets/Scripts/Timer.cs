@@ -7,13 +7,14 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float timeRemaining = 50;
-    public float inverseTime = 50;
+    public float timeRemaining = 10;
+    public float inverseTime = 10;
     public bool timerIsRunning = false;
     public GameManager ResetRound;
     public TextMeshProUGUI TimeLeft;
    
     public static float currentTime;
+
     private void Start()
     {
         // Starts the timer automatically

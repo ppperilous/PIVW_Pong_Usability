@@ -16,8 +16,10 @@ public class BallMovement : MonoBehaviour
 
     private Transform racketLeft_pos;
 
-    public float L_missCounter_Over;
-    public float L_missCounter_Under;
+    public float L_missCounter_Over = 0;
+    public float L_missCounter_Under = 0;
+    public float R_missCounter_Over = 0;
+    public float R_missCounter_Under = 0;
 
     //Create a stop watch
     Stopwatch sw = new Stopwatch();
@@ -32,7 +34,8 @@ public class BallMovement : MonoBehaviour
     {
         RacketLeft = GameObject.Find("RacketLeft");
         RacketRight = GameObject.Find("RacketRight");
-        racketLeft_pos = GameObject.Find("RacketRight").transform;
+
+        //racketLeft_pos = GameObject.Find("RacketRight").transform;
        
 
         // Stop movement of Left Racket (as ball moves to the right
@@ -133,13 +136,17 @@ public class BallMovement : MonoBehaviour
         // Hit the left Wall?
         if (col.gameObject.name == "WallLeft")
         {
-           // Debug.Log("Ball is at " + this.transform.position.y + " and racket is " + racketLeft_pos.position.y);
-             if (this.transform.position.y >= racketLeft_pos.position.y)
+            //Check if Ball Missed Over or Under
+            if (this.transform.position.y >= RacketLeft.transform.position.y)
             {
-                L_missCounter_Over ++;
+                L_missCounter_Over++;
+
             }
             else
-                L_missCounter_Under ++;
+            {
+                L_missCounter_Under++;
+
+            }
 
             //Reposition ball to center
             float yPos = Random.Range(-5, 12);
@@ -160,6 +167,17 @@ public class BallMovement : MonoBehaviour
         //Hit the right wall?
         if (col.gameObject.name == "WallRight")
         {
+            //Check if Ball Missed Over or Under
+            if (this.transform.position.y > RacketRight.transform.position.y)
+            {
+                R_missCounter_Over++;
+
+            }
+            else
+            {
+                R_missCounter_Under++;
+
+            }
 
             //Reposition ball to center
             transform.position = new Vector2(0, 0);
