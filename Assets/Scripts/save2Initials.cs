@@ -28,8 +28,6 @@ public class save2Initials : MonoBehaviour
         name1 = _inputField.text;
         name2 = _inputField2.text;
         
-        Tinylytics.AnalyticsManager.LogCustomMetric("PlayerNames", "P1:" + name1 + "_" + "P2:" + name2);
-        
         roundName = name1 +"/"+name2;
     }
 
@@ -37,6 +35,7 @@ public class save2Initials : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Tinylytics.AnalyticsManager.LogCustomMetric("PlayerNames", "P1:" + name1 + "_" + "P2:" + name2);
             start_Opening();
         }
     }
