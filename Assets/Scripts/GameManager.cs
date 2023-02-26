@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetRound()
     {
-        Debug.Log("In Reset Round");
+        
 
         if (Timer.currentTime >= 10)
         {
@@ -100,22 +100,23 @@ public class GameManager : MonoBehaviour
             trialNum = trialNum + 1;
 
             int tempTrialNum = trialNum; //so that tinylytics doesn't mess with trialNum
+            string tempTrialName = trialName;
 
             //Log Trial End
-            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "TrialEndTime", "End " + System.DateTime.Now);
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + tempTrialName + "_" + tempTrialNum.ToString() + "_" + "TrialEndTime", "End " + System.DateTime.Now);
 
             //Log Trial's Misses and Scores
-            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "MissesAndTotalScore", _misses.ToString() +"_"+ _totalScore.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + tempTrialName + "_" + tempTrialNum.ToString() + "_" + "MissesAndTotalScore", _misses.ToString() +"_"+ _totalScore.ToString());
 
             //Log Misses on both walls over or under the racket
-            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString() + "_" + "MissesOverOrUnderRacket", "LeftWallOver:" + ballStats.L_missCounter_Over.ToString() + "_" + "LeftWallUnder:_" + ballStats.L_missCounter_Under.ToString() + "_" + "RightWallOver:_" + ballStats.R_missCounter_Over.ToString() + "_" + "RightWallUnder:_" + ballStats.R_missCounter_Under.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + tempTrialName + "_" + tempTrialNum.ToString() + "_" + "MissesOverOrUnderRacket", "LeftWallOver:" + ballStats.L_missCounter_Over.ToString() + "_" + "LeftWallUnder:_" + ballStats.L_missCounter_Under.ToString() + "_" + "RightWallOver:_" + ballStats.R_missCounter_Over.ToString() + "_" + "RightWallUnder:_" + ballStats.R_missCounter_Under.ToString());
 
             //Log Rapid Presses
-            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + trialNum.ToString() + "_" + "RapidPress", "D_" + ListeningForKeys.d_totalRapidPresses + "_W_" + ListeningForKeys.w_totalRapidPresses);
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + tempTrialName + "_" + tempTrialNum.ToString() + "_" + "RapidPress", "DownKey_" + ListeningForKeys.d_totalRapidPresses + "_wKey_" + ListeningForKeys.w_totalRapidPresses);
 
             //Log DeadLock instances and Avg Time
             float deadLockAvg = ListeningForKeys.deadlockTotalTime /ListeningForKeys.deadlockNum;
-            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + trialName + "_" + tempTrialNum.ToString() + "_" + "DeadLocks", "Instances_" + ListeningForKeys.deadlockNum.ToString() + "_" + "AverageTime_" +deadLockAvg.ToString());
+            Tinylytics.AnalyticsManager.LogCustomMetric(save2Initials.roundName + "_" + tempTrialName + "_" + tempTrialNum.ToString() + "_" + "DeadLocks", "Instances_" + ListeningForKeys.deadlockNum.ToString() + "_" + "AverageTime_" +deadLockAvg.ToString());
 
             //  Tinylytics.AnalyticsManager.LogCustomMetric("Time Taken", Timer.currentTime.ToString());
 
