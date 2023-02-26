@@ -44,7 +44,7 @@ public class ListeningForKeys : MonoBehaviour
         deadlockTime = 0;
         deadlockNum = 0;
 
-        //For trackingTappers_W();
+        //For trackingTappers_W & D();
         sw2.Start();
         wCounter = 0;
         w_timeLog_B = 0;
@@ -67,12 +67,13 @@ public class ListeningForKeys : MonoBehaviour
         {
             sw.Start();
             theyDeadlocked = true;
-            deadlockNum++;
+            
             UnityEngine.Debug.Log("PressedBoth");
         }
 
         if (theyDeadlocked && (!Input.GetKey("w") || !Input.GetKey("down")))
         {
+            deadlockNum++;
             deadlockTime = sw.ElapsedMilliseconds; UnityEngine.Debug.Log("Deadlocked " + deadlockTime.ToString());
             deadlockTotalTime += deadlockTime;
             sw.Reset();
