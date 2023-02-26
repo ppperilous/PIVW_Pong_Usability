@@ -180,7 +180,6 @@ public class MoveRacket : MonoBehaviour
                 if (speed < 0) speed = 0;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, prevV) * speed;
 
-                
             }
             else if (v != prevV)
             {
@@ -192,7 +191,7 @@ public class MoveRacket : MonoBehaviour
             }
             else if (v == prevV)
             {
-                accFactor++;
+                accFactor+=2;
                 if (speed < maxSpeed) speed += accFactor;
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, v) * speed;
             }
